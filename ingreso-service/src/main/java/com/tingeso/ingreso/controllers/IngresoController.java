@@ -14,9 +14,9 @@ public class IngresoController {
     @Autowired
     IngresoService ingresoService;
 
-    @GetMapping("/{fecha}")
-    public ResponseEntity<IngresoEntity> obtenerIngreso(@PathVariable("fecha") Date fecha) {
-        return ResponseEntity.ok(ingresoService.getIngreso(fecha));
+    @GetMapping("/{num_doc}")
+    public ResponseEntity<IngresoEntity> obtenerIngreso(@PathVariable("num_doc") String num_doc) {
+        return ResponseEntity.ok(ingresoService.getIngreso(num_doc));
     }
 
     @PostMapping()

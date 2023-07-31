@@ -19,6 +19,8 @@ public class IngresoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Date fecha;
+    private String tipodoc;
+    private String numdoc;
     private String motivo;
     private Integer dinero;
 }

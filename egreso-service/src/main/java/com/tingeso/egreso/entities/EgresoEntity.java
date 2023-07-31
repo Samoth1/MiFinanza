@@ -19,8 +19,8 @@ public class EgresoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Date fecha;
-    private String documento;
+    private String tipodoc;
+    private String numdoc;
     private String motivo;
-    private Integer num_doc;
     private Integer dinero;
 }

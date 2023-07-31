@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origin-patterns: '*'
+            allowed-methods: "*"
+            allowed-headers: "*"
+            allow-credentials: true
+      routes:
+        - id: ingreso-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/ingreso/**
+        - id: egreso-service
+          uri: http://localhost:8083
+          predicates:
+            - Path=/egreso/**
+        - id: resumenmov-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/resumenmov/**

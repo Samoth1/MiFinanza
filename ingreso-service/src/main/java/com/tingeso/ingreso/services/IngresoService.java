@@ -12,16 +12,18 @@ public class IngresoService {
     @Autowired
     IngresoRepository ingresoRepository;
 
-    public void createIngreso(Date fecha, String motivo, Integer dinero) {
+    public void createIngreso(Date fecha, String numero_doc, Integer dinero) {
         IngresoEntity ingreso = new IngresoEntity();
         ingreso.setFecha(fecha);
-        ingreso.setMotivo(motivo);
+        ingreso.setTipodoc("Recibo");
+        ingreso.setNumdoc(numero_doc);
+        ingreso.setMotivo("Ingreso a Caja");
         ingreso.setDinero(dinero);
         ingresoRepository.save(ingreso);
     }
 
-    public IngresoEntity getIngreso(Date fecha){
-        return ingresoRepository.findByFecha(fecha);
+    public IngresoEntity getIngreso(String num){
+        return ingresoRepository.findByNumdoc(num);
     }
 
 }

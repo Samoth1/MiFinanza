@@ -11,7 +11,8 @@ import java.util.Date;
 @AllArgsConstructor
 public class EgresoModel {
     private Date fecha;
-    private String documento;
+    private String tipo_doc;
+    private String num_doc;
     private String motivo;
-    private Integer num_doc;
+    private Integer dinero;
 }

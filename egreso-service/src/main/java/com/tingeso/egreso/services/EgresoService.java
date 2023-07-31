@@ -12,18 +12,18 @@ public class EgresoService {
     @Autowired
     private EgresoRepository egresoRepository;
 
-    public void createEgreso(Date fecha, String documento, String motivo, Integer num_doc, Integer dinero) {
+    public void createEgreso(Date fecha, String tipo_doc, String numero_doc, String motivo, Integer dinero) {
         EgresoEntity egreso = new EgresoEntity();
         egreso.setFecha(fecha);
-        egreso.setDocumento(documento);
+        egreso.setTipodoc(tipo_doc);
+        egreso.setNumdoc(numero_doc);
         egreso.setMotivo(motivo);
-        egreso.setNum_doc(num_doc);
         egreso.setDinero(dinero);
         egresoRepository.save(egreso);
     }
 
-    public EgresoEntity getEgreso(Date fecha){
-        return egresoRepository.findByFecha(fecha);
+    public EgresoEntity getEgreso(String num_doc){
+        return egresoRepository.findByNumdoc(num_doc);
     }
 
 }

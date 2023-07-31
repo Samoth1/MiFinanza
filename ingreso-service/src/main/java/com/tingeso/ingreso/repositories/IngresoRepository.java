@@ -4,9 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import com.tingeso.ingreso.entities.IngresoEntity;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 @Repository
 public interface IngresoRepository extends JpaRepository<IngresoEntity, Integer> {
-    IngresoEntity findByFecha(Date fecha);
+    IngresoEntity findByNumdoc(String num);
 }

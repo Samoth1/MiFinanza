@@ -1,0 +1,15 @@
+server:
+  port: 8082
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:8083}
+    hostname: entrada-service
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
