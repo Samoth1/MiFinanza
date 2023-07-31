@@ -15,13 +15,13 @@ public class EgresoController {
     EgresoService egresoService;
 
     @GetMapping("/{fecha}")
-    public ResponseEntity<EgresoEntity> categoriaPago(@PathVariable("fecha") Date fecha) {
+    public ResponseEntity<EgresoEntity> obtenerEgreso(@PathVariable("fecha") Date fecha) {
         return ResponseEntity.ok(egresoService.getEgreso(fecha));
     }
 
     @PostMapping()
-    public ResponseEntity<?> saveEgreso(@RequestBody EgresoEntity egreso){
-        egresoService.createEgreso(egreso.getFecha(), egreso.getDocumento(), egreso.getMotivo(), egreso.getNum_doc());
+    public ResponseEntity<?> guardarEgreso(@RequestBody EgresoEntity egreso){
+        egresoService.createEgreso(egreso.getFecha(), egreso.getDocumento(), egreso.getMotivo(), egreso.getNum_doc(), egreso.getDinero());
         return ResponseEntity.ok().build();
     }
 }

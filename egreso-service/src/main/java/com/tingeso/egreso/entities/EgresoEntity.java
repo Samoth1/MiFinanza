@@ -22,5 +22,5 @@ public class EgresoEntity {
     private String documento;
     private String motivo;
     private Integer num_doc;
-
+    private Integer dinero;
 }

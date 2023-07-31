@@ -20,4 +20,5 @@ public class IngresoEntity {
     private Integer id;
     private Date fecha;
     private String motivo;
+    private Integer dinero;
 }

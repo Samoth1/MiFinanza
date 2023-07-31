@@ -12,11 +12,11 @@ public class IngresoService {
     @Autowired
     IngresoRepository ingresoRepository;
 
-    public void createIngreso(Date fecha, String motivo) {
+    public void createIngreso(Date fecha, String motivo, Integer dinero) {
         IngresoEntity ingreso = new IngresoEntity();
         ingreso.setFecha(fecha);
         ingreso.setMotivo(motivo);
-
+        ingreso.setDinero(dinero);
         ingresoRepository.save(ingreso);
     }
 

@@ -17,7 +17,11 @@ public class ResumenMovService {
     public String getEgreso(Date fecha){
         return restTemplate.getForObject("http://egreso-service/egreso"+ fecha, String.class);
     }
-    public String saveEgreso(Date fecha){
-        return restTemplate.getForObject("http://egreso-service/egreso"+ fecha, String.class);
+
+    // REST CONTROLLER PARA INGRESO
+    public String getIngreso(Date fecha){
+        return restTemplate.getForObject("http://ingreso-service/ingreso"+ fecha, String.class);
     }
+
+
 }
