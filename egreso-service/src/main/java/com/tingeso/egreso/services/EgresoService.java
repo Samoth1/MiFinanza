@@ -22,8 +22,11 @@ public class EgresoService {
         egresoRepository.save(egreso);
     }
 
-    public EgresoEntity getEgreso(String num_doc){
-        return egresoRepository.findByNumdoc(num_doc);
+    public EgresoEntity getEgreso(String num){
+        System.out.print(num);
+        EgresoEntity egresin = egresoRepository.findByNumdoc(num);
+        System.out.print(egresin);
+        return egresin;
     }
 
 }

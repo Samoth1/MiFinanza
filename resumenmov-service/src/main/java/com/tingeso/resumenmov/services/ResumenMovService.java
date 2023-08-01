@@ -19,23 +19,22 @@ public class ResumenMovService {
     @Autowired
     RestTemplate restTemplate;
 
-
     // REST CONTROLLER PARA EGRESO
     public EgresoModel getEgreso(String num_doc){
-        return restTemplate.getForObject("http://egreso-service/egreso"+ num_doc, EgresoModel.class);
+        return restTemplate.getForObject("http://localhost:8083/egreso/"+ num_doc, EgresoModel.class);
     }
 
     // REST CONTROLLER PARA INGRESO
     public IngresoModel getIngreso(String num_doc){
-        return restTemplate.getForObject("http://ingreso-service/ingreso"+ num_doc, IngresoModel.class);
+        return restTemplate.getForObject("http://localhost:8082/ingreso/"+ num_doc, IngresoModel.class);
     }
 
     public void createResumen(Date fecha, String tipo_doc, String numero_doc, Integer movimiento) {
         ResumenMovEntity resumen = new ResumenMovEntity();
         Integer saldo = buscarSaldoActual() + movimiento;
         resumen.setFecha(fecha);
-        resumen.setTipo_doc(tipo_doc);
-        resumen.setNum_doc(numero_doc);
+        resumen.setTipodoc(tipo_doc);
+        resumen.setNumdoc(numero_doc);
         resumen.setSaldo(saldo);
         resumenMovRepository.save(resumen);
     }
@@ -57,16 +56,16 @@ public class ResumenMovService {
             ReporteEntity resumen = new ReporteEntity();
 
             resumen.setFecha(movimiento.getFecha());
-            resumen.setTipo_doc(movimiento.getTipo_doc());
-            resumen.setNum_doc(movimiento.getNum_doc());
-            if (movimiento.getTipo_doc().equals("Recibo")){
-                IngresoModel ingreso = getIngreso(movimiento.getNum_doc());
+            resumen.setTipo_doc(movimiento.getTipodoc());
+            resumen.setNum_doc(movimiento.getNumdoc());
+            if (movimiento.getTipodoc().equals("Recibo")){
+                IngresoModel ingreso = getIngreso(movimiento.getNumdoc());
                 resumen.setMotivo(ingreso.getMotivo());
                 resumen.setIngreso(ingreso.getDinero());
                 resumen.setSalida(0);
             }
             else {
-                EgresoModel egreso = getEgreso(movimiento.getNum_doc());
+                EgresoModel egreso = getEgreso(movimiento.getNumdoc());
                 resumen.setMotivo(egreso.getMotivo());
                 resumen.setIngreso(0);
                 resumen.setSalida(egreso.getDinero());

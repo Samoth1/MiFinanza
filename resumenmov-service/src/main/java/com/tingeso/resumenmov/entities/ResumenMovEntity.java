@@ -19,7 +19,7 @@ public class ResumenMovEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Date fecha;
-    private String tipo_doc;
-    private String num_doc;
+    private String tipodoc;
+    private String numdoc;
     private Integer saldo;
 }
