@@ -21,12 +21,12 @@ public class ResumenMovService {
 
     // REST CONTROLLER PARA EGRESO
     public EgresoModel getEgreso(String num_doc){
-        return restTemplate.getForObject("http://localhost:8083/egreso/"+ num_doc, EgresoModel.class);
+        return restTemplate.getForObject("http://localhost:8080/egreso/"+ num_doc, EgresoModel.class);
     }
 
     // REST CONTROLLER PARA INGRESO
     public IngresoModel getIngreso(String num_doc){
-        return restTemplate.getForObject("http://localhost:8082/ingreso/"+ num_doc, IngresoModel.class);
+        return restTemplate.getForObject("http://localhost:8080/ingreso/"+ num_doc, IngresoModel.class);
     }
 
     public void createResumen(Date fecha, String tipo_doc, String numero_doc, Integer movimiento) {

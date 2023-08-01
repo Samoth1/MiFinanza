@@ -21,7 +21,7 @@ public class IngresoController {
 
     @PostMapping()
     public ResponseEntity<?> guardarIngreso(@RequestBody IngresoEntity ingreso){
-        ingresoService.createIngreso(ingreso.getFecha(), ingreso.getMotivo(), ingreso.getDinero());
+        ingresoService.createIngreso(ingreso.getFecha(), ingreso.getNumdoc(), ingreso.getDinero());
         return ResponseEntity.ok().build();
     }
 }

@@ -24,7 +24,6 @@ public class ResumenMovController {
 
     @GetMapping
     public List<ReporteEntity> datosResumen(@RequestParam Date fecha1, @RequestParam Date fecha2){
-        System.out.print(fecha1);
         return resumenMovService.getReporte(fecha1, fecha2);
     }
 }
