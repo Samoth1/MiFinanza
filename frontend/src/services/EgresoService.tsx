@@ -3,15 +3,15 @@ import axios from 'axios';
 const url = 'http://localhost:8080/egreso';
 
 class EgresoService {
-    nuevoEgreso(fecha: Date, tipodoc: string, numdoc: string, motivo: string, dinero: BigInteger) {
-        const proveedor = {
+    nuevoEgreso(fecha: any, tipodoc: string, numdoc: string, motivo: string, dinero: number) {
+        const egreso = {
           fecha: fecha,
           tipodoc: tipodoc,
           numdoc: numdoc,
           motivo: motivo,
           dinero: dinero
         };
-        return axios.post(url);
+        return axios.post(url, egreso);
       }
 }
 

@@ -11,15 +11,15 @@ export default class HomeComponent extends Component {
       <Grid>
         <Row>
           <Col xs={8}>
-            <h1>Crear Ingreso</h1>
+            <h1>Registrar Ingreso</h1>
             <button onClick={() => this.redireccionar('/ingreso')}>
-              Crear Ingreso
+              Crear ingreso
             </button>
           </Col>
           <Col xs={8}>
-            <h1>Crear Egreso</h1>
+            <h1>Registrar Egreso</h1>
             <button onClick={() => this.redireccionar('/egreso')}>
-              Crear Proveedor
+              Crear egreso
             </button>
           </Col>
           <Col xs={8}>

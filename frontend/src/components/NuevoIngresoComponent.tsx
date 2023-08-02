@@ -1,14 +1,14 @@
 import React, { Component, ChangeEvent } from 'react';
 import IngresoService from '../services/IngresoService';
+import ResumenMovService from '../services/ResumenMovService';
 import NavBar from './NavbarComponent';
 import { Form, ButtonToolbar, Button, SelectPicker } from 'rsuite';
 
 interface NuevoIngresoState {
-  fecha: Date;
+  fecha: any;
   numdoc: string;
-  dinero: Integer;
+  dinero: number;
 }
-
 
 class NuevoIngresoComponent extends Component<{}, NuevoIngresoState> {
   constructor(props: {}) {
@@ -16,7 +16,7 @@ class NuevoIngresoComponent extends Component<{}, NuevoIngresoState> {
     this.state = {
       fecha: '',
       numdoc: '',
-      dinero: ''
+      dinero: 0
     };
   }
 
@@ -29,7 +29,7 @@ class NuevoIngresoComponent extends Component<{}, NuevoIngresoState> {
   };
 
   changeDineroHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ dinero: event.target.value });
+    this.setState({ dinero: parseFloat(event.target.value) });
   };
 
   saveIngreso = (e: React.FormEvent) => {
@@ -38,10 +38,21 @@ class NuevoIngresoComponent extends Component<{}, NuevoIngresoState> {
       this.state.fecha,
       this.state.numdoc,
       this.state.dinero
-    ).then((res) => {
-      window.alert('Se registro el ingreso');
-      window.location.href = '/proveedor';
-    });
+      ).then((res) => {
+        this.saveResumen().then((res2) => {
+          window.alert('Se registro el ingreso');
+          window.location.href = '/home';
+        })
+      });
+    };
+
+  saveResumen = () => {
+    return ResumenMovService.nuevoResumen(
+      this.state.fecha,
+      "Recibo",
+      this.state.numdoc,
+      this.state.dinero
+    )
   };
 
   render() {
@@ -61,10 +72,9 @@ class NuevoIngresoComponent extends Component<{}, NuevoIngresoState> {
         <div style={{ width: '1000px' }}></div>
         <Form>
 
-          //Convertir a fecha
           <Form.Group onChange={this.changeFechaHandler}>
             <Form.ControlLabel>Fecha</Form.ControlLabel>
-            <Form.Control name="fecha"/>
+            <Form.Control name="fecha" type="date"/>
           </Form.Group>
 
           <Form.Group onChange={this.changeNumDocHandler}>
@@ -73,7 +83,7 @@ class NuevoIngresoComponent extends Component<{}, NuevoIngresoState> {
           </Form.Group>
 
           <Form.Group onChange={this.changeDineroHandler}>
-            <Form.ControlLabel>Dinero a egresar</Form.ControlLabel>
+            <Form.ControlLabel>Dinero a ingresar</Form.ControlLabel>
             <Form.Control name="dinero" />
           </Form.Group>
 

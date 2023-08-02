@@ -12,5 +12,5 @@ import java.util.Optional;
 @Repository
 public interface ResumenMovRepository extends JpaRepository<ResumenMovEntity, Integer> {
     ResumenMovEntity findTopByOrderByIdDesc();
-    List<ResumenMovEntity> findByFechaBetween(Date fecha1, Date fecha2);
+    List<ResumenMovEntity> findByFechaBetweenOrderByIdAsc(Date fecha1, Date fecha2);
 }

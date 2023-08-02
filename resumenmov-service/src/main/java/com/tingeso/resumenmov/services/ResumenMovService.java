@@ -40,18 +40,23 @@ public class ResumenMovService {
     }
 
     public Integer buscarSaldoActual(){
-        ResumenMovEntity resumen = resumenMovRepository.findTopByOrderByIdDesc();
+        ResumenMovEntity resumen = new ResumenMovEntity();
+        resumen.setSaldo(0);
+        try{
+            resumen = resumenMovRepository.findTopByOrderByIdDesc();
+        }catch(Exception e){
+        }
         return resumen.getSaldo();
     }
 
     public List<ResumenMovEntity> obtenerMovFecha(Date fecha1, Date fecha2){
-        return resumenMovRepository.findByFechaBetween(fecha1, fecha2);
+        return resumenMovRepository.findByFechaBetweenOrderByIdAsc(fecha1, fecha2);
     }
 
     public List<ReporteEntity> getReporte(Date fecha1, Date fecha2){
         List<ReporteEntity> reporte = new ArrayList<ReporteEntity>();
         List<ResumenMovEntity> movimientos = obtenerMovFecha(fecha1, fecha2);
-
+        System.out.print(movimientos);
         for(ResumenMovEntity movimiento : movimientos){
             ReporteEntity resumen = new ReporteEntity();
 

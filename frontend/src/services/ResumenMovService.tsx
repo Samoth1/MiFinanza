@@ -4,18 +4,18 @@ const url = 'http://localhost:8080/resumenmov';
 
 class ResumenMovService {
 
-    nuevoResumen(fecha: Date, tipodoc: string, numdoc: string, motivo: string, saldo: BigInteger) {
-        const proveedor = {
+    nuevoResumen(fecha: any, tipodoc: string, numdoc: string, saldo: number) {
+        const resumen = {
           fecha: fecha,
           tipodoc: tipodoc,
           numdoc: numdoc,
           saldo: saldo
         };
-        return axios.post(url);
+        return axios.post(url, resumen);
       }
 
-    mostrarResumen(fecha1: Date, fecha2: Date){
-      return axios.post(`${url}?fecha1=${fecha1}&fecha2=${fecha2}`);
+    mostrarResumen(fecha1: any, fecha2: any){
+      return axios.get(`${url}?fecha1=${fecha1}&fecha2=${fecha2}`);
     }
 
 }

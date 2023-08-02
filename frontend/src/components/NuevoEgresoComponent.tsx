@@ -1,25 +1,26 @@
 import React, { Component, ChangeEvent } from 'react';
 import EgresoService from '../services/EgresoService';
+import ResumenMovService from '../services/ResumenMovService';
 import NavBar from './NavbarComponent';
 import { Form, ButtonToolbar, Button, SelectPicker } from 'rsuite';
 
 interface NuevoEgresoState {
-  fecha: Date;
+  fecha: any;
   tipodoc: string;
   numdoc: string;
   motivo: string;
-  dinero: Integer;
+  dinero: number;
 }
-
 
 class NuevoEgresoComponent extends Component<{}, NuevoEgresoState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      codigo: '',
-      nombre: '',
-      categoria: '',
-      retencion: ''
+      fecha: '',
+      tipodoc: '',
+      numdoc: '',
+      motivo: '',
+      dinero: 0
     };
   }
 
@@ -40,7 +41,7 @@ class NuevoEgresoComponent extends Component<{}, NuevoEgresoState> {
   };
 
   changeDineroHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ dinero: event.target.value });
+    this.setState({ dinero: parseFloat(event.target.value) });
   };
 
   saveEgreso = (e: React.FormEvent) => {
@@ -52,9 +53,20 @@ class NuevoEgresoComponent extends Component<{}, NuevoEgresoState> {
       this.state.motivo,
       this.state.dinero
     ).then((res) => {
-      window.alert('Se registro el egreso');
-      window.location.href = '/proveedor';
+      this.saveResumen().then((res2) => {
+        window.alert('Se registro el egreso');
+        window.location.href = '/home';
+      })
     });
+  };
+
+  saveResumen = () => {
+    return ResumenMovService.nuevoResumen(
+      this.state.fecha,
+      this.state.tipodoc,
+      this.state.numdoc,
+      (-1*this.state.dinero)
+    )
   };
 
   render() {
@@ -84,10 +96,9 @@ class NuevoEgresoComponent extends Component<{}, NuevoEgresoState> {
         <div style={{ width: '1000px' }}></div>
         <Form>
 
-          //Convertir a fecha
           <Form.Group onChange={this.changeFechaHandler}>
             <Form.ControlLabel>Fecha</Form.ControlLabel>
-            <Form.Control name="fecha"/>
+            <Form.Control name="fecha" type="date"/>
           </Form.Group>
 
           <Form.Group>
